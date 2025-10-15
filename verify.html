@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Winning ID - The Fan Lounge</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-[#FFF8F0] min-h-screen flex justify-center items-center p-4">
+
+  <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full text-center">
+    <div class="mx-auto bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">ID</div>
+    <h1 class="text-2xl font-bold text-gray-800 mb-3">Winning ID Verification</h1>
+    <p class="text-gray-600 mb-6">Enter your winning ID to access the ID submission form.</p>
+
+    <input id="winningId" type="text" placeholder="Enter your Winning ID"
+      class="w-full border rounded-lg p-3 mb-4 focus:ring focus:ring-purple-300 text-center">
+
+    <button id="verifyBtn" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all">
+      Continue
+    </button>
+
+    <p id="errorMsg" class="text-red-600 mt-4 hidden">Invalid Winning ID. Please check and try again.</p>
+  </div>
+
+  <script>
+    const validIds = [
+      "TFL20258752AF",
+      "TFL20258753BC",
+      "TFL20258754XZ" // add more valid IDs here
+    ];
+
+    document.getElementById('verifyBtn').addEventListener('click', () => {
+      const userId = document.getElementById('winningId').value.trim().toUpperCase();
+      const errorMsg = document.getElementById('errorMsg');
+
+      if (validIds.includes(userId)) {
+        // Save to localStorage to remember access
+        localStorage.setItem("verifiedId", userId);
+        window.location.href = "submitdetails.html";
+      } else {
+        errorMsg.classList.remove("hidden");
+      }
+    });
+  </script>
