@@ -2,50 +2,49 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>🎉 You’re a Winner! | THEFANLOUNGE Giveaway</title>
+  <title>🎉 Congratulations ${Contacts.First Name}! | THEFANLOUNGE Giveaway</title>
 </head>
 <body style="margin:0; padding:0; background-color:#FFF8F0; font-family:'Poppins', Arial, sans-serif; color:#333;">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#FFF8F0; padding:40px 0;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#FFF8F0; padding:0;">
     <tr>
       <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#fff; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.08); overflow:hidden;">
+        <table width="100%" max-width="600" cellpadding="0" cellspacing="0" border="0" style="background:#fff; border-radius:0; box-shadow:0 2px 10px rgba(0,0,0,0.05); overflow:hidden; margin:0; padding:0;">
           
-          <!-- Header Section -->
+          <!-- Header with image -->
           <tr>
-            <td align="center" style="background-color:#f57c00; padding:40px 20px;">
-              <h1 style="color:#fff; font-size:28px; margin:0;">THE FAN LOUNGE</h1>
-              <p style="color:#fff; font-size:16px; margin-top:8px;">Official Giveaway Notification</p>
+            <td align="center" style="background-color:#f57c00; padding:0;">
+              <img src="https://files.oaiusercontent.com/file_00000000e6306243956c950f6b923785" alt="THE FAN LOUNGE" width="100%" style="display:block; max-width:600px; height:auto;">
             </td>
           </tr>
 
           <!-- Body -->
           <tr>
-            <td style="padding:40px 40px 30px 40px; text-align:center;">
-              <h2 style="color:#f57c00; font-size:24px; margin-bottom:15px;">🎉 Congratulations!</h2>
-              <p style="font-size:16px; line-height:1.7; color:#555; margin-bottom:25px;">
+            <td style="padding:30px 20px; text-align:center;">
+              <h2 style="color:#f57c00; font-size:22px; margin-bottom:10px;">🎉 Congratulations, ${Contacts.First Name}!</h2>
+              <p style="font-size:15px; line-height:1.6; color:#555; margin-bottom:20px;">
                 You’ve been selected as one of our lucky winners in the <strong>THEFANLOUNGE Giveaway!</strong>  
-                We’re so excited to celebrate you and can’t wait to deliver your prize.
+                We’re thrilled to celebrate you and can’t wait to deliver your reward.
               </p>
 
-              <div style="background-color:#FFF4E5; border:1px dashed #f57c00; padding:18px; border-radius:10px; margin-bottom:25px;">
-                <p style="margin:0; font-size:15px; color:#333;">Your Unique Winning ID:</p>
-                <p style="margin:8px 0 0 0; font-size:20px; font-weight:bold; color:#f57c00;">TFL20258755WD</p>
+              <div style="background-color:#FFF4E5; border:1px dashed #f57c00; padding:14px; border-radius:8px; margin-bottom:20px;">
+                <p style="margin:0; font-size:14px; color:#333;">Your Unique Winning ID:</p>
+                <p style="margin:8px 0 0 0; font-size:18px; font-weight:bold; color:#f57c00;">${Contacts.WinningID}</p>
               </div>
 
-              <p style="font-size:15px; color:#555; margin-bottom:30px;">
-                To claim your reward, verify your Winning ID and fill in your delivery details securely by clicking below.
+              <p style="font-size:14px; color:#555; margin-bottom:25px;">
+                To claim your prize, please verify your Winning ID and complete your secure details submission using the button below.
               </p>
 
-              <a href="https://thefanlounge.site/thankyou" 
-                 style="display:inline-block; background-color:#f57c00; color:#fff; text-decoration:none; padding:14px 34px; 
-                        border-radius:8px; font-weight:600; font-size:16px; letter-spacing:0.3px;">
+              <a href="https://thefanlounge.site/thankyou?id=${Contacts.WinningID}" 
+                 style="display:inline-block; background-color:#f57c00; color:#fff; text-decoration:none; padding:12px 28px; 
+                        border-radius:6px; font-weight:600; font-size:15px;">
                 Click Here to Submit Details
               </a>
 
-              <p style="font-size:14px; color:#777; margin-top:25px;">
+              <p style="font-size:13px; color:#777; margin-top:20px;">
                 If the button doesn’t work, copy and paste this link into your browser:<br>
-                <a href="https://thefanlounge.site/thankyou" style="color:#f57c00; word-break:break-all;">
-                  https://thefanlounge.site/thankyou
+                <a href="https://thefanlounge.site/thankyou?id=${Contacts.WinningID}" style="color:#f57c00; word-break:break-all;">
+                  https://thefanlounge.site/thankyou?id=${Contacts.WinningID}
                 </a>
               </p>
             </td>
@@ -53,8 +52,8 @@
 
           <!-- Footer -->
           <tr>
-            <td style="background-color:#FFF4E5; padding:20px; text-align:center; border-top:1px solid #FFE0B2;">
-              <p style="font-size:13px; color:#999; margin:0;">
+            <td style="background-color:#FFF4E5; padding:15px; text-align:center; border-top:1px solid #FFE0B2;">
+              <p style="font-size:12px; color:#999; margin:0;">
                 © 2025 THEFANLOUNGE • All Rights Reserved<br>
                 You’re receiving this email because you participated in our giveaway.
               </p>
