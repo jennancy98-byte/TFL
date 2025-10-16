@@ -4,74 +4,101 @@
   <meta charset="UTF-8">
   <title>🎉 You’re a Winner! | THEFANLOUNGE Giveaway</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #FFF8F0;
+      font-family: 'Poppins', Arial, sans-serif;
+      color: #333;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .email-container {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      overflow: hidden;
+      width: 440px;
+      text-align: center;
+    }
+    .header img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    h2 {
+      color: #f57c00;
+      font-size: 20px;
+      margin: 20px 0 10px 0;
+    }
+    p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      margin: 10px 25px;
+    }
+    .winning-id {
+      background-color: #FFF4E5;
+      border: 1px dashed #f57c00;
+      padding: 12px;
+      border-radius: 10px;
+      margin: 18px auto;
+      width: 80%;
+    }
+    .winning-id p {
+      margin: 5px 0;
+    }
+    .id-value {
+      color: #f57c00;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    .button {
+      display: inline-block;
+      background-color: #f57c00;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 26px;
+      border-radius: 8px;
+      font-weight: 600;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .footer {
+      background-color: #FFF4E5;
+      padding: 12px;
+      font-size: 11px;
+      color: #999;
+      border-top: 1px solid #FFE0B2;
+    }
+  </style>
 </head>
-<body style="margin:0; padding:0; background-color:#FFF8F0; font-family:'Poppins', Arial, sans-serif; color:#333;">
-
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" 
-         style="background-color:#FFF8F0; height:100vh; text-align:center;">
-    <tr>
-      <td align="center" valign="middle" style="padding:30px 15px;">
-
-        <table width="480" cellpadding="0" cellspacing="0" border="0" 
-               style="background:#fff; border-radius:16px; box-shadow:0 3px 18px rgba(0,0,0,0.08); overflow:hidden; margin:auto;">
-
-          <!-- Header Image -->
-          <tr>
-            <td align="center" style="padding:0; background-color:#f57c00;">
-              <img src="https://i.ibb.co/p6jdKF5T/Aquamarine-Illustrated-Confetti-Congratulations-Email-Header.png" 
-                   alt="THEFANLOUNGE Giveaway Header" 
-                   width="100%" 
-                   style="display:block; max-width:480px; height:auto;">
-            </td>
-          </tr>
-
-          <!-- Body -->
-          <tr>
-            <td style="padding:35px 30px 25px 30px; text-align:center;">
-              <h2 style="color:#f57c00; font-size:22px; margin-bottom:15px;">🎉 Congratulations!</h2>
-              <p style="font-size:15px; line-height:1.7; color:#555; margin-bottom:20px;">
-                You’ve been selected as one of our lucky winners in the <strong>THEFANLOUNGE Giveaway!</strong>  
-                We’re thrilled to celebrate you and can’t wait to deliver your prize.
-              </p>
-
-              <div style="background-color:#FFF4E5; border:1px dashed #f57c00; padding:15px; border-radius:10px; margin-bottom:20px;">
-                <p style="margin:0; font-size:14px; color:#333;">Your Unique Winning ID:</p>
-                <p style="margin:8px 0 0 0; font-size:18px; font-weight:bold; color:#f57c00;">TFL20258755WD</p>
-              </div>
-
-              <p style="font-size:14px; color:#555; margin-bottom:25px;">
-                To claim your reward, verify your Winning ID and fill in your delivery details securely by clicking below.
-              </p>
-
-              <a href="https://thefanlounge.site/thankyou" 
-                 style="display:inline-block; background-color:#f57c00; color:#fff; text-decoration:none; padding:12px 30px; 
-                        border-radius:8px; font-weight:600; font-size:15px; letter-spacing:0.2px;">
-                Click Here to Submit Details
-              </a>
-
-              <p style="font-size:13px; color:#777; margin-top:20px;">
-                If the button doesn’t work, copy and paste this link into your browser:<br>
-                <a href="https://thefanlounge.site/thankyou" style="color:#f57c00; word-break:break-all;">
-                  https://thefanlounge.site/thankyou
-                </a>
-              </p>
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="background-color:#FFF4E5; padding:18px; text-align:center; border-top:1px solid #FFE0B2;">
-              <p style="font-size:12px; color:#999; margin:0;">
-                © 2025 THEFANLOUNGE • All Rights Reserved<br>
-                You’re receiving this email because you participated in our giveaway.
-              </p>
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
-  </table>
-
+<body>
+  <div class="email-container">
+    <div class="header">
+      <img src="https://i.ibb.co/p6jdKF5T/Aquamarine-Illustrated-Confetti-Congratulations-Email-Header.png" 
+           alt="THEFANLOUNGE Giveaway Header">
+    </div>
+    <h2>🎉 Congratulations!</h2>
+    <p>You’ve been selected as one of our lucky winners in the <strong>THEFANLOUNGE Giveaway!</strong>  
+       We’re thrilled to celebrate you and can’t wait to deliver your prize.</p>
+    <div class="winning-id">
+      <p>Your Unique Winning ID:</p>
+      <p class="id-value">TFL20258755WD</p>
+    </div>
+    <p>To claim your reward, verify your Winning ID and fill in your delivery details securely by clicking below.</p>
+    <a href="https://thefanlounge.site/thankyou" class="button">Click Here to Submit Details</a>
+    <p style="font-size:12px; color:#777; margin-top:18px;">
+      If the button doesn’t work, copy and paste this link into your browser:<br>
+      <a href="https://thefanlounge.site/thankyou" style="color:#f57c00;">https://thefanlounge.site/thankyou</a>
+    </p>
+    <div class="footer">
+      © 2025 THEFANLOUNGE • All Rights Reserved<br>
+      You’re receiving this email because you participated in our giveaway.
+    </div>
+  </div>
 </body>
 </html>
