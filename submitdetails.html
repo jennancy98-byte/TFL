@@ -38,9 +38,18 @@
           <input type="email" name="Email" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
+        <!-- UPDATED PHONE FIELD -->
         <div>
           <label class="block font-medium text-gray-700">Phone Number</label>
-          <input type="tel" name="Phone Number" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+          <input 
+            type="tel" 
+            name="Phone Number" 
+            id="phoneInput"
+            required 
+            maxlength="14"
+            class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"
+            placeholder="(123) 456-7890"
+          >
         </div>
 
         <div class="md:col-span-2">
@@ -78,7 +87,6 @@
         <h3 class="text-xl font-semibold text-gray-800 mb-3">Upload ID (Front & Back)</h3>
 
         <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-          <!-- Front Upload -->
           <div class="flex-1">
             <label class="block text-gray-700 font-medium mb-1">Front Side</label>
             <button type="button" id="uploadFrontBtn" class="bg-purple-600 text-white py-2 px-4 rounded-lg w-full hover:bg-purple-700 transition">Upload Front</button>
@@ -88,7 +96,6 @@
             <input type="hidden" id="frontUrl" name="ID Front">
           </div>
 
-          <!-- Back Upload -->
           <div class="flex-1">
             <label class="block text-gray-700 font-medium mb-1">Back Side</label>
             <button type="button" id="uploadBackBtn" class="bg-purple-600 text-white py-2 px-4 rounded-lg w-full hover:bg-purple-700 transition">Upload Back</button>
@@ -125,7 +132,6 @@
       const progressBar = document.getElementById(barId);
 
       button.addEventListener('click', () => {
-        // Reset UI
         button.textContent = "Uploading...";
         button.classList.remove("bg-green-600");
         button.classList.add("bg-purple-600");
@@ -151,12 +157,32 @@
 
     setupUpload("uploadFrontBtn", "frontUrl", "frontProgress", "frontBar");
     setupUpload("uploadBackBtn", "backUrl", "backProgress", "backBar");
-    
-  // Redirect back if not verified
-  const verified = localStorage.getItem("verifiedId");
-  if (!verified) {
-    window.location.href = "verify.html";
-  }
-    
+
+    const verified = localStorage.getItem("verifiedId");
+    if (!verified) {
+      window.location.href = "verify.html";
+    }
+
+    // PHONE NUMBER AUTO FORMATTER
+    const phoneInput = document.getElementById('phoneInput');
+
+    phoneInput.addEventListener('input', function (e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 10) value = value.slice(0, 10);
+
+      let formatted = value;
+
+      if (value.length > 6) {
+        formatted = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6)}`;
+      } else if (value.length > 3) {
+        formatted = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+      } else if (value.length > 0) {
+        formatted = `(${value}`;
+      }
+
+      e.target.value = formatted;
+    });
   </script>
+
 </body>
+</html>
