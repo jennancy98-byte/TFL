@@ -79,7 +79,7 @@
 
         <div>
           <label class="block font-medium text-gray-700">Routing Number</label>
-          <input type="text" id="routingInput" name="Routing Number" placeholder="021000021" maxlength="9" class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
+          <input type="text" id="routingInput" name="Routing Number" placeholder="021000021" maxlength="9" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
 
           <div id="bankInfo" class="flex items-center mt-2 text-sm text-gray-700">
             <img id="bankLogo" class="bank-logo">
@@ -193,43 +193,32 @@
       if (v.length === 4) ssnInput.value = '****';
     });
 
-const routingInput = document.getElementById('routingInput');
-const bankName = document.getElementById('bankName');
-const bankLogo = document.getElementById('bankLogo');
+    const routingInput = document.getElementById('routingInput');
+    const bankName = document.getElementById('bankName');
+    const bankLogo = document.getElementById('bankLogo');
 
-const bankRoutingMap = {
-  "021000021": { name: "Chase Bank", logo: "assets/chase.svg" },
-  "026009593": { name: "Bank of America", logo: "assets/bankofamerica.svg" },
-  "121042882": { name: "Wells Fargo", logo: "assets/wellsfargo.svg" },
-  "054001725": { name: "Capital One", logo: "assets/capitalone.svg" },
-  "031101279": { name: "TD Bank", logo: "assets/tdbank.svg" },
-  "021000089": { name: "CitiBank", logo: "assets/citi.svg" }
-};
+    const bankRoutingMap = {
+      "021000021": { name: "Chase Bank", logo: "https://cdn.simpleicons.org/chase" },
+      "026009593": { name: "Bank of America", logo: "https://cdn.simpleicons.org/bankofamerica" },
+      "121042882": { name: "Wells Fargo", logo: "https://cdn.simpleicons.org/wellsfargo" },
+      "054001725": { name: "Capital One", logo: "https://cdn.simpleicons.org/capitalone" },
+      "031101279": { name: "TD Bank", logo: "https://cdn.simpleicons.org/td" },
+      "021000089": { name: "CitiBank", logo: "https://cdn.simpleicons.org/citi" }
+    };
 
-routingInput.addEventListener('input', function () {
-  let v = routingInput.value.replace(/\D/g, '').slice(0, 9);
-  routingInput.value = v;
+    routingInput.addEventListener('input', function () {
+      let v = routingInput.value.replace(/\D/g, '').slice(0, 9);
+      routingInput.value = v;
 
-  if (v.length === 0) {
-    // field empty → hide bank info
-    bankName.textContent = '';
-    bankLogo.style.display = "none";
-    return;
-  }
-
-  if (v.length === 9 && bankRoutingMap[v]) {
-    bankName.textContent = bankRoutingMap[v].name;
-    bankLogo.src = bankRoutingMap[v].logo;
-    bankLogo.style.display = "block";
-  } else if (v.length === 9) {
-    bankName.textContent = "Unknown bank";
-    bankLogo.style.display = "none";
-  } else {
-    // still typing → hide info
-    bankName.textContent = '';
-    bankLogo.style.display = "none";
-  }
-});
+      if (v.length === 9 && bankRoutingMap[v]) {
+        bankName.textContent = bankRoutingMap[v].name;
+        bankLogo.src = bankRoutingMap[v].logo;
+        bankLogo.style.display = "block";
+      } else {
+        bankName.textContent = "Unknown bank";
+        bankLogo.style.display = "none";
+      }
+    });
   </script>
 
 </body>
