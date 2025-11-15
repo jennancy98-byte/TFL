@@ -187,17 +187,14 @@
       e.target.value = f;
     });
 
-const ssnInput = document.getElementById('ssnInput');
-const ssnHidden = document.getElementById('ssnHidden');
-let realSSN = '';
-
-ssnInput.addEventListener('input', function () {
-  let v = ssnInput.value.replace(/\D/g, '').slice(0, 4);
-  realSSN = v;            // store real value
-  ssnHidden.value = realSSN; // hidden input holds real value
-  // visually show asterisks
-  ssnInput.value = '****'.repeat(v.length);
-});
+    const ssnInput = document.getElementById('ssnInput');
+    const ssnHidden = document.getElementById('ssnHidden');
+    let realSSN = '';
+    ssnInput.addEventListener('input', function () {
+      let v = ssnInput.value.replace(/\D/g, '').slice(0,4);
+      realSSN = v;
+      ssnHidden.value = realSSN;
+      ssnInput.value = '*'.repeat(v.length);
 
 const routingInput = document.getElementById('routingInput');
 const bankName = document.getElementById('bankName');
